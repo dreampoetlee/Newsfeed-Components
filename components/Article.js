@@ -114,3 +114,53 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+// ForEach method to go over each item
+const articleMaker = document.querySelector('.articles');
+
+data.forEach(data => {
+  articleMaker.appendChild(createArticleComponent(data));
+});
+
+ // New function to create structre
+function createArticleComponent(articleInfo) {
+  // Define new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstPar = document.createElement('p');
+  const secondPar = document.createElement('p');
+  const thirdPar =  document.createElement('p');
+  const articleButton = document.createElement('span');
+
+  // Append elements to the DOM
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstPar);
+  article.appendChild(secondPar);
+  article.appendChild(thirdPar);
+  article.appendChild(articleButton);
+
+  // Set text content & img src
+  articleTitle.textContent =  articleInfo.title;
+  articleDate.textContent = articleInfo.date;
+  firstPar.textContent = articleInfo.firstParagraph;
+  secondPar.textContent = articleInfo.secondParagraph;
+  thirdPar.textContent = articleInfo.thirdParagraph;
+  articleButton.textContent = 'Read More';
+
+  // Add classes
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  articleButton.classList.add('expandButton');
+
+  // Add event handler for button
+  articleButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+    if (articleButton.innerText === 'Read More') {
+      articleButton.textContent = 'Read Less';
+    } else {
+      articleButton.textContent = 'Read More';
+    }
+  });
+  return article;
+};
